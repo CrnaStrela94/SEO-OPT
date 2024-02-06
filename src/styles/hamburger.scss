@@ -1,0 +1,45 @@
+@import "./stylesheets";
+
+.hamburger {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  height: 3rem;
+  width: 3rem;
+  font-size: 3rem;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.4 ease-out;
+
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+nav {
+  position: absolute;
+  top: 5rem;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
+  a {
+    font-family: $font-family;
+    font-size: $font-size;
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: $font-weight;
+    margin: 0.7rem 0;
+    border: 0.1rem solid $secondary-color;
+    max-width: 10rem;
+    padding: 0.3rem;
+    z-index: 999;
+  }
+}
+
+.notes {
+  min-width: 20vw;
+  min-height: 20vh;
+}

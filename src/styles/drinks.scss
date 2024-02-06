@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+form {
+  margin-bottom: 20px;
+
+  select,
+  input,
+  button {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
+.results-wrapper {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.result {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  img {
+    margin-right: 1rem;
+    max-width: 10rem;
+    height: 10rem;
+  }
+}

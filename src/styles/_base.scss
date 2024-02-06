@@ -1,0 +1,22 @@
+@import "./stylesheets";
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family;
+  background-color: $background-color;
+  color: $primary-color;
+}
+.greeting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  max-height: 4rem;
+  h1 {
+    font-size: 3rem;
+
+    @media (max-width: 600px) {
+      font-size: 2rem;
+    }
+  }
+}
