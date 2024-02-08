@@ -38,7 +38,7 @@ const UrlMetadata = () => {
                     type="text"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    placeholder="Enter URL"
+                    placeholder="Enter URL ex: https://www.example.com"
                     required
                     className="input"
                 />

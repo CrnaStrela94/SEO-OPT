@@ -32,7 +32,7 @@ const SemrushMagic = () => {
 
     return (
         <div className="keyword-overview">
-            <h1>Keyword Overview</h1>
+            <h1>Keyword Overview Semrush</h1>
             <form onSubmit={handleSubmit} className="form">
                 <input
                     type="text"
@@ -46,7 +46,7 @@ const SemrushMagic = () => {
                     type="text"
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
-                    placeholder="Enter country"
+                    placeholder="Enter country code ex: us, uk, in, etc."
                     required
                     className="input"
                 />

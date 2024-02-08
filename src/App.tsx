@@ -20,7 +20,10 @@ function App() {
   const [notes, setNotes] = useState(localStorage.getItem('notes') || '');
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showNotes, setShowNotes] = useState(false);
 
+  // Check if user is signed in
   useEffect(() => {
     const signedInUser = onAuthStateChanged(auth, (user) => {
       setIsSignedIn(!!user);
@@ -43,14 +46,46 @@ function App() {
       setShowAlert(true);
     }
   };
+  // Close sign in form when clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showSignIn && !((event.target as HTMLElement)?.closest('.signIn'))) {
+        setShowSignIn(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showSignIn]);
+  // Close notes when clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showNotes && !((event.target as HTMLElement)?.closest('.notesWrapper'))) {
+        setShowNotes(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showNotes]);
 
   return (
     <Router>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div style={{ width: '65%', marginRight: '2rem' }}>
+      <div className='header'>
+        <div className='greeting'>
+          <h1>welcome to all in one SEO</h1>
+        </div>
+        <div>
           <button onClick={toggleMenu} className="hamburger">
             ☰
           </button>
+
           {isOpen && (
             <nav>
               <Link onClick={(event) => handleLinkClick(event)} to="/webScrapper">Web Scrapper</Link>
@@ -60,9 +95,7 @@ function App() {
               <Link onClick={(event) => handleLinkClick(event)} to="/keyword">Keyword suggestion</Link>
             </nav>
           )}
-          <div className='greeting'>
-            <h1>welcome to all in one SEO</h1>
-          </div>
+          {/* Alert that is displayed when a non-signed in user tries to access a feature */}
           {showAlert && (
             <Alert variant="danger" >
               <button onClick={() => setShowAlert(false)} type="button" className="close" aria-label="Close">
@@ -75,6 +108,7 @@ function App() {
             </Alert>
           )}
           <AuthDetail>
+            {/* Routes that are accessible only to signed in users */}
             {isSignedIn && (
               <Routes>
                 <Route path="/webScrapper" element={<WebScrapper />} />
@@ -85,21 +119,35 @@ function App() {
               </Routes>
 
             )}
-            <div className='notesWrapper' >
-              <h2>Are you tired? You need a break. Make a drink!</h2>
-              <CocktailSearch />
-              <textarea className='notes'
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="Write your notes here..."
-              />
-              <button onClick={handleSave}>Save Notes</button>
-            </div>
+            {/* Button to toggle the notes section */}
+            <button className='noteBtn' onClick={() => setShowNotes(!showNotes)}>Notes</button>
+            {/* Notes section that includes a cocktail search feature */}
+            {showNotes && (
+              <div className='notesWrapper'>
+                <h2>Are you tired? You need a break. Make a drink!</h2>
+                <CocktailSearch />
+                <textarea className='notes'
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="Write your notes here..."
+                />
+                <button onClick={handleSave}>Save Notes</button>
+              </div>
+            )}
           </AuthDetail>
         </div>
-        <div style={{ width: '10%', marginRight: '15rem' }}>
-          <SignIn />
-          <Register />
+        <div>
+          {/* Sign in button for non-signed in users */}
+          {!isSignedIn && (
+            <button className='signInBtn' onClick={() => setShowSignIn(true)}>Sign In</button>
+          )}
+          {/* Sign in and register forms */}
+          {showSignIn && (
+            <div className='signIn'>
+              <SignIn />
+              <Register />
+            </div>
+          )}
         </div>
 
 

@@ -30,7 +30,7 @@ export const AuthDetail = ({ children }: AuthDetailProps): JSX.Element => {
     };
 
     return (
-        <div>
+        <div className='signInInfo'>
             {authUser ? <><p>Signed In as {authUser.email}</p><button onClick={UserSignOut}>Sign Out</button>{children}</> : <p>Signed Out</p>}
         </div>
     );
