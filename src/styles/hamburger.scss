@@ -1,0 +1,50 @@
+@import "./stylesheets";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(61, 61, 61, 0.633);
+  height: 15vh;
+}
+
+.hamburger {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  width: 3rem;
+  font-size: 3rem;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.4 ease-out;
+
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+nav {
+  position: absolute;
+  top: 5rem;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
+  a {
+    font-family: $font-family;
+    font-size: $font-size;
+    color: $primary-color;
+    text-decoration: none;
+    text-align: center;
+    font-weight: $font-weight;
+    margin: 0.4rem 0;
+    border: 0.1rem solid $secondary-color;
+    border-radius: 0.3rem;
+    background: $background-color;
+    max-width: 10rem;
+    padding: 0.3rem;
+    z-index: 999;
+  }
+}
