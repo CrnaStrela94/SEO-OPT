@@ -2,13 +2,14 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const UrlMetadata = () => {
+    // State variables for URL, includeSource and metadata
     const [url, setUrl] = useState('');
     const [includeSource, setIncludeSource] = useState('');
     const [metadata, setMetadata] = useState(null);
-
+    // Function to handle form submission
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-
+        // Options for the axios request
         const options = {
             method: 'GET',
             url: 'https://url-metadata-opengraph.p.rapidapi.com/parse',
@@ -23,6 +24,7 @@ const UrlMetadata = () => {
         };
 
         try {
+            // Make the request and set the metadata state variable
             const response = await axios.request(options);
             setMetadata(response.data);
         } catch (error) {
