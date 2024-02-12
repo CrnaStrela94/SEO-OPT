@@ -6,7 +6,7 @@ interface AuthDetailProps {
     children: ReactNode;
 }
 
-export const AuthDetail = ({ children }: AuthDetailProps): JSX.Element => {
+export const AuthDetail = ({ children }: AuthDetailProps): ReactNode => {
     const [authUser, setAuthUser] = useState<User | null>(null);
 
     useEffect(() => {

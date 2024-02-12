@@ -1,9 +1,20 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+type Drink<T extends string | number | symbol> = {
+    [key in T]: T | null;
+} & {
+    strDescription: T;
+    strInstructions: T;
+    strIngredient: T;
+    strDrinkThumb: T;
+    strDrink: T;
+    strIngredientThumb: T;
+};
+
 const CocktailSearch = () => {
     const [input, setInput] = useState('');
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState<Drink<any>[]>([]);
     const [searchType, setSearchType] = useState('cocktail');
 
     const handleSearch = async (e: { preventDefault: () => void; }) => {
@@ -50,12 +61,17 @@ const CocktailSearch = () => {
                 <button type="submit">Search</button>
             </form>
             <div className="results-wrapper">
-
-                {results && results.map((result: any, index: number) => (
+                {results && results.map((result, index) => (
                     <div key={index} className="result">
-                        <h2>{result.strDrink || result.strIngredient}</h2>
-                        <img src={result.strDrinkThumb || result.strIngredientThumb} alt={result.strDrink || result.strIngredient} />
-                        <p>{result.strInstructions || result.strDescription}</p>
+                        <h2>{result.strDrink}</h2>
+                        <img src={result.strDrinkThumb} alt={result.strDrink} />
+                        <p>{result.strInstructions}</p>
+                        {Object.keys(result).map((key) => {
+                            if (key.startsWith('strIngredient') && result[key]) {
+                                return <p key={key}>{result[key]}</p>;
+                            }
+                            return null;
+                        })}
                     </div>
                 ))}
             </div>
